@@ -70,4 +70,13 @@ contract yesNoPoll {
             polls[_user] = Poll(0,0,no,yes,total); //replace the last poll with an empty one.
         }
     }
+
+    function displayNoVotes(address _user) public view returns (uint){
+        return polls[_user].no;
+    }
+
+    function displayYesVotes(address _user) public view returns (uint) {
+        return polls[_user].yes;
+    }
+
 }

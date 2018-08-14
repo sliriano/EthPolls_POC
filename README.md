@@ -7,3 +7,5 @@ A real world example of these issues is amongst many exchanges. Exchanges often 
 
 Holding votes on a blockchain allows for votes to be protected by voting bots via Ethereum's protocol (specifically gas transaction fees), this also unincetivices uneducated users to vote since each vote will cost a small amount of ether and each voter can only vote once. EthPolls removes the third part and ensures additional security and honesty regarding votes.
 
+This project is not yet completed and would appreciate the contribution and feedback of others in the community.
+

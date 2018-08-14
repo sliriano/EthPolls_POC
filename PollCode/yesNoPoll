@@ -7,6 +7,7 @@ contract yesNoPoll {
         uint no;
         address[] noVotes;
         address[] yesVotes;
+        address[] totalVotes;
         mapping(address=>bool) hasVoted;
     }
 
@@ -16,12 +17,13 @@ contract yesNoPoll {
     function createPoll() public returns(string) {
         address[] no; //fillers to pass into the creation of poll
         address[] yes;
+        address[] total;
         address creator = msg.sender;
         if (_checkPoll(creator)) { // if user has a poll then..
             return "You must destroy your other poll in order to create a new one";
         }
         else {
-            polls[creator] = Poll(0,0,no,yes); // create poll
+            polls[creator] = Poll(0,0,no,yes,total); // create poll
             hasPoll[creator] = true; // establishes that user has a poll
             return "Creation complete";
         }
@@ -45,6 +47,7 @@ contract yesNoPoll {
                 polls[creatorAddress].noVotes.push(msg.sender);
             }
             polls[creatorAddress].hasVoted[msg.sender] = true;
+            polls[creatorAddress].totalVotes.push(msg.sender);
         }
     }
 
@@ -59,8 +62,12 @@ contract yesNoPoll {
         if (_user == msg.sender) {
             address[] no; //fillers to pass into the creation of poll
             address[] yes;
+            address[] total;
+            for (uint x = 0; x < polls[_user].totalVotes.length; x++){
+                polls[_user].hasVoted[polls[_user].totalVotes[x]] = false;
+            }
             hasPoll[_user] = false;
-            polls[_user] = Poll(0,0,no,yes); //replace the last poll with an empty one.
+            polls[_user] = Poll(0,0,no,yes,total); //replace the last poll with an empty one.
         }
     }
 }

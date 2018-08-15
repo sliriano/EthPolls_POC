@@ -37,10 +37,10 @@ This project is not yet completed and would appreciate the contribution and feed
 3. Make sure that you have Metamask installed and are connected to the network of your choice.
 4. Deploy the contract.
 5. Fill in the createPoll text-box with the data you want voted on followed by the number of items. The number MUST correspond to the amount of data you are inputting. If you wish to vote for less than five simply input "" for unused data.
-   *Example: "proof of work","proof of stake", "delegated proof of stake", "other", "none",5
-   In the example above, users can then vote for any of those five options.
-   Example: "proof of work", "proof of stake", "delegated proof of stake","","",3
-   In the example above, users can only vote for the first three options*
+   *Example: "proof of work","proof of stake", "delegated proof of stake", "other", "none",5*
+   *In the example above, users can then vote for any of those five options.*
+   *Example: "proof of work", "proof of stake", "delegated proof of stake","","",3*
+   *In the example above, users can only vote for the first three options*
 6. Click on the createPoll button under the deployed contract heading and your poll will be created.
 
 # Multi-Data Poll Voting Instructions
@@ -49,9 +49,9 @@ This project is not yet completed and would appreciate the contribution and feed
 2. Make sure you have metamask installed and both the address of the contract deployed and the address of the user who created the poll.
 3. Input the contract address under the heading "Load from contract Address", then click the At Address Button.
 4. Under the deployed contract heading fill in the box with the poll's creators address and your vote.
-   *Example:
-   option 1: Bitcoin
-   option 2: litecoin
-   option 3: Bitcoin Cash
-   In this format: 0x8e73aef2448068d4e31f86aa08279465339ff601,"1" you would be casting a vote for bitcoin.*
+   *Example:*
+   *option 1: Bitcoin*
+   *option 2: litecoin*
+   *option 3: Bitcoin Cash*
+   *In this format: 0x8e73aef2448068d4e31f86aa08279465339ff601,"1" you would be casting a vote for bitcoin.*
 5. Click on vote and your vote will be submited.

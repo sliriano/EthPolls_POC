@@ -18,7 +18,6 @@ contract Polls {
     }
 
     mapping(address=>Poll) public polls; // creator => poll
-    mapping(address=>bool) public hasPoll; //keeps track of who has a poll
     
     function createPoll(string option1, string option2, string option3, string option4, string option5,uint choices) public returns(string) {
         address[] filler; //filler array passed into the poll
@@ -35,13 +34,12 @@ contract Polls {
             polls[creator].optionList.push(option3);
             polls[creator].optionList.push(option4);
             polls[creator].optionList.push(option5);
-            hasPoll[creator] = true; // establishes that the user has a poll
             return "Creation complete";
         }
     }
     
     function _checkPoll(address _user) private view returns (bool){
-        if(hasPoll[_user]){ //checks if the user currently has a poll
+        if(polls[_user].voters.length >0){ //checks if the user currently has a poll
             return true;
         }
         return false;
@@ -70,13 +68,10 @@ contract Polls {
     }
     function destroyPoll(address _user) public {
         if (_user == msg.sender) {
-            address[] no; //fillers to pass into the creation of poll
-            string[] yes; //filler
             for (uint x = 0; x < polls[_user].voters.length; x++){
                 polls[_user].hasVoted[polls[_user].voters[x]] = false;
             }
-            hasPoll[_user] = false;
-            polls[_user] = Poll("","","","","",0,no,yes); //replace the last poll with an empty one.
+           delete polls[_user];
         }
     }
     

@@ -68,7 +68,7 @@ contract Polls {
     }
     function destroyPoll(address _user) public {
         if (_user == msg.sender) {
-        uint voterCount = polls[_user].voters.length;;
+        uint voterCount = polls[_user].voters.length;
             for (uint x = 0; x < voterCount; x++){
                 polls[_user].hasVoted[polls[_user].voters[x]] = false;
             }

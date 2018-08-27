@@ -7,26 +7,26 @@ contract yesNoPoll {
         address[] yesVotes;
         address[] totalVotes;
         mapping(address=>bool) hasVoted;
+        string description;
     }
 
     mapping(address=>Poll) polls;
 
-    function createPoll() public returns(string) {
+    function createPoll(string description) public returns(bool) {
         address[] no; //fillers to pass into the creation of poll
         address[] yes;
         address[] total;
-        address creator = msg.sender;
-        if (_checkPoll(creator)) { // if user has a poll then..
-            return "You must destroy your other poll in order to create a new one";
+        if (_checkPoll(msg.sender) == false) { // if user already has a poll then..
+            return false;
         }
         else {
-            polls[creator] = Poll(no,yes,total); // create poll
-            return "Creation complete";
+            polls[msg.sender] = Poll(no,yes,total,description); // create poll
+            return true;
         }
     }
 
     function _checkPoll(address _user) private view returns (bool){
-        if(polls[_user].totalVotes.length == 0){ //checks if the user currently has a poll
+        if(polls[_user].totalVotes.length == 0){ //checks if the user currently has a poll with over 0 votes
             return true;
         }
         return false;
@@ -54,8 +54,7 @@ contract yesNoPoll {
 
     function destroyPoll(address _user) public {
         if (_user == msg.sender) {
-            uint voterCount = polls[_user].totalVotes.length;
-            for (uint x = 0; x < voterCount; x++){
+            for (uint x = 0; x < polls[_user].totalVotes.length; x++){
                 polls[_user].hasVoted[polls[_user].totalVotes[x]] = false;
             }
             delete polls[_user];
@@ -68,5 +67,9 @@ contract yesNoPoll {
 
     function displayYesVotes(address _user) public view returns (uint) {
         return polls[_user].yesVotes.length;
+    }
+    
+    function displayDescription(address _user) public view returns (string) {
+        return polls[_user].description;
     }
 }

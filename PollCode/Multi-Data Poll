@@ -19,22 +19,21 @@ contract Polls {
 
     mapping(address=>Poll) public polls; // creator => poll
     
-    function createPoll(string option1, string option2, string option3, string option4, string option5,uint choices) public returns(string) {
+    function createPoll(string option1, string option2, string option3, string option4, string option5,uint choices) public returns(bool) {
         address[] filler; //filler array passed into the poll
-        address creator = msg.sender;
         string[] optionList; //also a filler
-        if (_checkPoll(creator)) { // if user has a poll then..
-            return "You must destroy your other poll in order to create a new one";
+        if (_checkPoll(msg.sender) == true) { // if user has a poll then..
+            return false;
         }
         else {
-            polls[creator] = Poll(option1,option2,option3,option4,option5,choices,filler,optionList); // create poll
+            polls[msg.sender] = Poll(option1,option2,option3,option4,option5,choices,filler,optionList); // create poll
             //add options to the optionList
-            polls[creator].optionList.push(option1);
-            polls[creator].optionList.push(option2);
-            polls[creator].optionList.push(option3);
-            polls[creator].optionList.push(option4);
-            polls[creator].optionList.push(option5);
-            return "Creation complete";
+            polls[msg.sender].optionList.push(option1);
+            polls[msg.sender].optionList.push(option2);
+            polls[msg.sender].optionList.push(option3);
+            polls[msg.sender].optionList.push(option4);
+            polls[msg.sender].optionList.push(option5);
+            return true;
         }
     }
     
@@ -68,8 +67,7 @@ contract Polls {
     }
     function destroyPoll(address _user) public {
         if (_user == msg.sender) {
-        uint voterCount = polls[_user].voters.length;
-            for (uint x = 0; x < voterCount; x++){
+            for (uint x = 0; x < polls[_user].voters.length; x++){
                 polls[_user].hasVoted[polls[_user].voters[x]] = false;
             }
            delete polls[_user];

@@ -81,28 +81,33 @@ contract Polls {
         }
     }
     
-    //functions to display the results of each option
-    function showOptionOneResults(address _user) public view returns(uint) {
+    //functions to display the results of each option and the options themselves
+
+    function showOptions(address _user, uint whichOption) public view returns(string) {
+        return polls[_user].optionList[whichOption];
+    }
+    
+
+    function optionOneResults(address _user) public view returns(uint) {
         return polls[_user].voteValues[polls[_user].option1];
     }
     
-    function showOptionTwoResults(address _user) public view returns(uint) {
+    function optionTwoResults(address _user) public view returns(uint) {
         return polls[_user].voteValues[polls[_user].option2];
     }
 
-    function showOptionThreeResults(address _user) public view returns(uint) {
+    function optionThreeResults(address _user) public view returns(uint) {
         return polls[_user].voteValues[polls[_user].option3];
     }
     
-    function showOptionFourResults(address _user) public view returns(uint) {
+    function optionFourResults(address _user) public view returns(uint) {
         return polls[_user].voteValues[polls[_user].option4];
     }
     
-    function showOptionFiveResults(address _user) public view returns(uint) {
+    function optionFiveResults(address _user) public view returns(uint) {
         return polls[_user].voteValues[polls[_user].option5];
     }
     function displayDescription(address _user) public view returns (string) {
         return polls[_user].description;
     }
-    
 }

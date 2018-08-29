@@ -4,6 +4,7 @@ contract Polls {
     
     struct Poll {
         //voting choices
+        string description;
         string option1;
         string option2;
         string option3;
@@ -19,20 +20,26 @@ contract Polls {
 
     mapping(address=>Poll) public polls; // creator => poll
     
-    function createPoll(string option1, string option2, string option3, string option4, string option5,uint choices) public returns(bool) {
+    function createPoll(string description, string option1, string option2, string option3, string option4, string option5) public returns(bool) {
         address[] filler; //filler array passed into the poll
         string[] optionList; //also a filler
+        uint num = 0;
+        //add options to the optionList
+        optionList.push(option1);
+        optionList.push(option2);
+        optionList.push(option3);
+        optionList.push(option4);
+        optionList.push(option5);
+        for (uint x = 0; x< optionList.length; x++) {
+            if (keccak256("") != keccak256(optionList[x])){
+              num+=1;
+            }
+        }
         if (_checkPoll(msg.sender) == true) { // if user has a poll then..
             return false;
         }
         else {
-            polls[msg.sender] = Poll(option1,option2,option3,option4,option5,choices,filler,optionList); // create poll
-            //add options to the optionList
-            polls[msg.sender].optionList.push(option1);
-            polls[msg.sender].optionList.push(option2);
-            polls[msg.sender].optionList.push(option3);
-            polls[msg.sender].optionList.push(option4);
-            polls[msg.sender].optionList.push(option5);
+            polls[msg.sender] = Poll(description,option1,option2,option3,option4,option5,num,filler,optionList); // create poll
             return true;
         }
     }
@@ -94,4 +101,8 @@ contract Polls {
     function showOptionFiveResults(address _user) public view returns(uint) {
         return polls[_user].voteValues[polls[_user].option5];
     }
+    function displayDescription(address _user) public view returns (string) {
+        return polls[_user].description;
+    }
+    
 }

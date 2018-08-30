@@ -10,37 +10,34 @@ contract Polls {
         string option3;
         string option4;
         string option5;
-        uint optionsUsed; //amount of choices you will have for users to vote on
         address[] voters; // list of people who have voted
         string[] optionList; // list of the options
-        mapping(string=>uint) voteValues; //options mapped to amount of votes
+        uint[] voteResults;
         mapping(address=>bool) hasVoted; // keeps track of who has voted
         
     }
 
     mapping(address=>Poll) public polls; // creator => poll
     
-    function createPoll(string description, string option1, string option2, string option3, string option4, string option5) public returns(bool) {
+    function createPoll(string description,string option1, string option2, string option3, string option4, string option5) public returns(string) {
         address[] filler; //filler array passed into the poll
         string[] optionList; //also a filler
-        uint num = 0;
-        //add options to the optionList
-        optionList.push(option1);
-        optionList.push(option2);
-        optionList.push(option3);
-        optionList.push(option4);
-        optionList.push(option5);
-        for (uint x = 0; x< optionList.length; x++) {
-            if (keccak256("") != keccak256(optionList[x])){
-              num+=1;
-            }
-        }
-        if (_checkPoll(msg.sender) == true) { // if user has a poll then..
-            return false;
+        uint[] fill;
+        if (_checkPoll(msg.sender)) { // if user has a poll then..
+            return "You must destroy your other poll in order to create a new one";
         }
         else {
-            polls[msg.sender] = Poll(description,option1,option2,option3,option4,option5,num,filler,optionList); // create poll
-            return true;
+            polls[msg.sender] = Poll(description,option1,option2,option3,option4,option5,filler,optionList,fill); // create poll
+            //add options to the optionList
+            polls[msg.sender].optionList.push(option1);
+            polls[msg.sender].optionList.push(option2);
+            polls[msg.sender].optionList.push(option3);
+            polls[msg.sender].optionList.push(option4);
+            polls[msg.sender].optionList.push(option5);
+            for(uint x =0; x< 5; x++) {
+                polls[msg.sender].voteResults.push(0);
+            }
+            return "Creation complete";
         }
     }
     
@@ -53,11 +50,11 @@ contract Polls {
     
     function vote(address creatorAddress, uint decision) public returns(string) {
         if(_checkVoter(msg.sender,creatorAddress) == false) { // if the user has not yet voted
-            if (decision> polls[creatorAddress].optionsUsed || decision <=0){
+            if (decision> 5 || decision <=0){
                 return "Invalid Decision";
             }
             else {
-                polls[creatorAddress].voteValues[polls[creatorAddress].optionList[decision-1]] += 1; // increase the vote amount by 1
+                polls[creatorAddress].voteResults[decision-1] +=1;
                 polls[creatorAddress].hasVoted[msg.sender] = true;
                 polls[creatorAddress].voters.push(msg.sender);
                 return "Success";
@@ -67,7 +64,7 @@ contract Polls {
     }
 
     function _checkVoter(address _user, address creator) private view returns (bool) {
-        if (polls[creator].hasVoted[_user]){ // checks if voter has voted yet
+        if (polls[creator].hasVoted[_user] == true){ // checks if voter has voted yet
             return true;
         }
         return false;
@@ -81,33 +78,31 @@ contract Polls {
         }
     }
     
-    //functions to display the results of each option and the options themselves
-
-    function showOptions(address _user, uint whichOption) public view returns(string) {
-        return polls[_user].optionList[whichOption];
+    function showOptions(address _user, uint option) public view returns(string){
+        return polls[_user].optionList[option];
     }
     
-
-    function optionOneResults(address _user) public view returns(uint) {
-        return polls[_user].voteValues[polls[_user].option1];
+    //functions to display the results of each option
+    function showOptionOneResults(address _user) public view returns(uint) {
+        return polls[_user].voteResults[0];
     }
     
-    function optionTwoResults(address _user) public view returns(uint) {
-        return polls[_user].voteValues[polls[_user].option2];
-    }
-
-    function optionThreeResults(address _user) public view returns(uint) {
-        return polls[_user].voteValues[polls[_user].option3];
+    function showOptionTwoResults(address _user) public view returns(uint) {
+        return polls[_user].voteResults[1];
     }
     
-    function optionFourResults(address _user) public view returns(uint) {
-        return polls[_user].voteValues[polls[_user].option4];
+    function showOptionThreeResults (address _user) public view returns(uint) {
+        return polls[_user].voteResults[2];
     }
     
-    function optionFiveResults(address _user) public view returns(uint) {
-        return polls[_user].voteValues[polls[_user].option5];
+    function showOptionFourResults(address _user) public view returns(uint) {
+        return polls[_user].voteResults[3];
     }
-    function displayDescription(address _user) public view returns (string) {
+    
+    function showOptionFiveResults(address _user) public view returns(uint) {
+        return polls[_user].voteResults[4];
+    }
+    function displayDescription (address _user) public view returns (string) {
         return polls[_user].description;
     }
 }

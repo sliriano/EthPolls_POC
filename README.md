@@ -11,3 +11,6 @@ Holding votes on a blockchain allows for votes to be protected from voting bots 
 Visit ethpolls.com for a detailed description on the dapp  
 
 Visit ethpolls.surge.sh to use the dapp
+
+Listed on
+State of the dapps: https://www.stateofthedapps.com/dapps/ethpolls

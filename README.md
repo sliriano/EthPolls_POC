@@ -14,3 +14,4 @@ Visit https://www.ethpolls.surge.sh to use the dapp
 
 Listed on
 State of the dapps: https://www.stateofthedapps.com/dapps/ethpolls
+DappRadar: https://dappradar.com/app/884/ethpolls

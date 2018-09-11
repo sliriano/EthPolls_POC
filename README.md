@@ -8,10 +8,11 @@ A real world example of these issues is amongst many exchanges. Exchanges often 
 Holding votes on a blockchain allows for votes to be protected from voting bots via Ethereum's protocol (specifically gas transaction fees), this also eliminates the incentive for uneducated users to vote since each vote will cost a small amount of Ether and each voter can only vote once. EthPolls removes the third party and ensures additional security and honesty regarding votes.
 
 # Dapp
+
 Visit https://www.ethpolls.com for a detailed description on the dapp  
 
-Visit https://www.ethpolls.surge.sh to use the dapp
-
+Visit https://www.ethpolls.surge.sh to use the dapp  
+note: You must have metamask installed in order to use the dApp
 Listed on  
 State of the dapps: https://www.stateofthedapps.com/dapps/ethpolls  
 DappRadar: https://dappradar.com/app/884/ethpolls

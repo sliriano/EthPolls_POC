@@ -13,6 +13,7 @@ Visit https://www.ethpolls.com for a detailed description on the dapp
 
 Visit https://www.ethpolls.surge.sh to use the dapp  
 note: You must have metamask installed in order to use the dApp
+
 Listed on  
 State of the dapps: https://www.stateofthedapps.com/dapps/ethpolls  
 DappRadar: https://dappradar.com/app/884/ethpolls

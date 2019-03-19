@@ -37,7 +37,7 @@ contract yesNoPoll {
             if (decision == 1) { // if user votes yes
                 polls[creatorAddress].yesVotes.push(msg.sender); // add user to yes array
             }
-            else if (decision == 2) { // if user votes no
+            else if (decision == 0) { // if user votes no
                 polls[creatorAddress].noVotes.push(msg.sender); // add user to no array
             }
             else if (decision != 1 && decision != 0){ // if user votes neither 0 or 1, return false

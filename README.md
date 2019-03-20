@@ -18,4 +18,4 @@ Listed on
 State of the dapps: https://www.stateofthedapps.com/dapps/ethpolls  
 DappRadar: https://dappradar.com/app/884/ethpolls
 
-# EthPolls Versiion 1.0 Will Arrive Q3 2019
+EthPolls Version 1.0 Will Arrive Q3 2019

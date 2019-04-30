@@ -1,4 +1,4 @@
-# EthPolls
+# EthPolls Proof of Concept
 Polls that are held on the Ethereum blockchain that ensure data security, voting integrity and decentralization.
 
 Online poll voting and statistics derived from these votes suffer the vulnerabilities of voting bots, uneducated users regarding the voting topic and a centralized third party hosting the vote. 
@@ -9,13 +9,13 @@ Holding votes on a blockchain allows for votes to be protected from voting bots 
 
 # The dApp
 
-Visit https://www.ethpolls.com for a detailed description on the dapp  
+Visit https://www.ethpolls.com for a detailed description on the dapp 
 
-Visit https://www.ethpolls.surge.sh to use the dapp  
-Note: You must use an ethereum browser or have metamask installed in order to use the dApp.
+Visit https://www.ethpolls.surge.sh to view the initial proof of concept for the dApp. 
+Note: You must use an ethereum browser or have metamask installed in order to use this.
 
 Listed on  
 State of the dapps: https://www.stateofthedapps.com/dapps/ethpolls  
 DappRadar: https://dappradar.com/app/884/ethpolls
 
-EthPolls Version 1.0 Will Arrive Q3 2019
+EthPolls Beta has arrived and can be found at https://www.ethpolls.com
